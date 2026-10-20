@@ -1,0 +1,45 @@
+name: Import El-Moallem game project
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import-project:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and extract project
+        env:
+          ARCHIVE_URL: "https://d2ol7oe51mr4n9.cloudfront.net/user_3KYarFfzaVB9WLDC69ZcLdbjBjN/43d199c1-a3b9-4e01-b3ac-8fa70b5dd00b.zip"
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error "$ARCHIVE_URL" -o /tmp/el-moallem.zip
+          python3 - <<'PY'
+          import os, zipfile
+          src = "/tmp/el-moallem.zip"
+          with zipfile.ZipFile(src) as z:
+              files = [m for m in z.infolist() if m.filename.startswith("el-moallem/") and not m.is_dir()]
+              for m in files:
+                  rel = m.filename[len("el-moallem/"):]
+                  if not rel or rel.startswith("/") or ".." in rel.split("/"):
+                      continue
+                  # Exclude accidental browser crash/report data from the project.
+                  if rel.startswith(".config/google-chrome-for-testing/"):
+                      continue
+                  os.makedirs(os.path.dirname(rel) or ".", exist_ok=True)
+                  with z.open(m) as r, open(rel, "wb") as w:
+                      w.write(r.read())
+          print(f"Extracted {len(files)} archive entries")
+          PY
+      - name: Commit project files
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m "Import El-Moallem game project"
+          git push origin HEAD:main
