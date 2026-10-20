@@ -491,3 +491,54 @@ button { touch-action: manipulation; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+
+
+/* Illustrated storefront: let the commissioned-style scene, not a pixel filter, carry the visual detail. */
+.scene-wrap {
+  aspect-ratio: 320 / 316;
+  background: #d9b184;
+  border: 1px solid rgba(56, 41, 29, .18);
+  border-radius: 15px;
+  box-shadow: 0 12px 30px rgba(56, 41, 29, .17);
+  isolation: isolate;
+}
+.scene-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: auto;
+}
+.scene-status {
+  position: absolute;
+  z-index: 2;
+  inset-inline-start: 10px;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px 10px;
+  max-width: calc(100% - 20px);
+  padding: 7px 10px;
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 999px;
+  background: rgba(43, 29, 18, .88);
+  box-shadow: 0 4px 14px rgba(20, 13, 7, .22);
+  color: #fff8e8;
+  font-size: clamp(10px, 2.8vw, 12px);
+  font-weight: 800;
+  line-height: 1.35;
+  backdrop-filter: blur(6px);
+}
+.scene-status span { display: inline-flex; align-items: center; gap: 5px; }
+.scene-status__live i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: #9bd46f;
+  box-shadow: 0 0 0 3px rgba(155, 212, 111, .17);
+}
+@media (max-width: 380px) {
+  .scene-status { border-radius: 10px; padding: 6px 8px; gap: 4px 7px; }
+}
