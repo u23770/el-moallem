@@ -248,85 +248,26 @@ const C = (x, y, w, h, fill, stroke = '#4a3020') =>
   R(x, y, w, h, fill) + R(x, y, w, 1, stroke) + R(x, y + h - 1, w, 1, stroke);
 
 /** Egyptian corner-shop scene. Stock, fridge and renovations react to the actual game state. */
+/** High-detail illustrated storefront scene with state-aware upgrade treatment. */
 export function shopSceneSvg(state, productList) {
   const owned = new Set(state.upgrades);
-  let s = '';
-  // Sun-warmed plaster with a little wall wear and a patterned tile floor.
-  s += R(0, 0, 320, 190, '#e8d4aa') + R(0, 0, 320, 24, '#c9a16b');
-  s += R(10, 42, 28, 9, '#d9bd8d') + R(258, 35, 45, 12, '#d9bd8d') + R(64, 52, 18, 5, '#d9bd8d');
-  for (let x = 0; x < 320; x += 16) {
-    s += R(x, 24, 8, 8, '#b74f2b') + R(x + 8, 24, 8, 8, '#fff0d6');
-    s += R(x, 160, 8, 6, x % 32 ? '#a84a2b' : '#bd5b32') + R(x + 8, 166, 8, 6, '#f2dfb8');
+  let s = `<image href="/assets/el-moallem-shop-scene.webp" x="0" y="0" width="320" height="316" preserveAspectRatio="xMidYMid slice"/>`;
+
+  // The commissioned-style storefront artwork contains a display fridge. Until
+  // the player buys that upgrade, replace its area with wooden shop crates.
+  if (!owned.has('fridge')) {
+    s += R(280, 171, 40, 118, '#d8bd92');
+    s += R(280, 171, 40, 4, '#583921') + R(280, 171, 3, 118, '#583921');
+    s += R(281, 218, 39, 3, '#583921');
+    s += R(282, 221, 36, 29, '#b9783c') + R(284, 224, 32, 3, '#e0a15b');
+    s += R(281, 250, 39, 3, '#583921');
+    s += R(282, 253, 36, 30, '#99602f') + R(284, 256, 32, 3, '#c58b4d');
+    s += R(298, 222, 2, 27, '#754822') + R(298, 254, 2, 28, '#754822');
   }
-  s += R(0, 172, 320, 18, '#8d6b43');
-  for (let x = 0; x < 320; x += 20) s += R(x, 172, 2, 18, '#6d4b2d');
-  // Painted shop sign and old-fashioned hanging lamps.
-  const signColor = owned.has('sign') || owned.has('storefront') ? '#31572f' : '#795231';
-  s += R(91, 2, 138, 21, '#4a3020') + R(95, 4, 130, 17, signColor) + R(99, 7, 122, 11, '#f6e6c6');
-  for (const lx of [50, 160, 270]) {
-    s += R(lx, 30, 2, 10, '#4a3020') + R(lx - 5, 39, 12, 4, '#c18a27') + R(lx - 3, 43, 8, 5, '#ffe6a0');
-    s += R(lx - 1, 46, 4, 3, '#fff1bd', '.3');
-  }
-  // Shelves use a warm wooden frame, visible depth and product-specific silhouettes.
-  const shelfRows = owned.has('shelves') ? [57, 84, 111] : [64, 101];
-  const shelfX = 14, shelfW = 198;
-  for (const y of shelfRows) {
-    s += R(shelfX - 2, y - 2, shelfW + 4, 3, '#4b3020');
-    s += R(shelfX, y, shelfW, 17, '#d9b98a');
-    s += R(shelfX, y + 16, shelfW, 4, '#80502c') + R(shelfX, y + 20, shelfW, 2, '#57351f');
-    for (let x = shelfX + 4; x < shelfX + shelfW; x += 24) s += R(x, y + 2, 1, 13, '#bd9564');
-  }
-  let slot = 0;
-  const perRow = 12;
-  for (const p of productList) {
-    const qty = state.inventory[p.id] ?? 0;
-    const blocks = Math.max(0, Math.min(4, Math.ceil(qty / 4)));
-    for (let i = 0; i < blocks; i++) {
-      const row = Math.min(shelfRows.length - 1, Math.floor(slot / perRow));
-      const x = shelfX + 5 + (slot % perRow) * 16;
-      const y = shelfRows[row] + 2;
-      if (p.icon === 'bottle') {
-        s += R(x + 3, y, 3, 3, '#463022') + R(x + 2, y + 3, 5, 2, p.color) + R(x + 1, y + 5, 7, 9, p.color) + R(x + 2, y + 8, 5, 3, '#fff0d6') + R(x + 2, y + 5, 1, 7, '#ffffff', '.5');
-      } else if (p.icon === 'bag') {
-        s += R(x + 1, y + 2, 8, 12, p.color) + R(x + 1, y + 2, 8, 2, '#5b3823') + R(x + 2, y + 7, 6, 3, '#fff0d6') + R(x + 3, y + 3, 1, 8, '#ffffff', '.45');
-      } else if (p.icon === 'bar') {
-        s += R(x, y + 5, 10, 8, '#4b3020') + R(x + 1, y + 4, 8, 8, p.color) + R(x + 1, y + 5, 2, 6, '#e8c35b') + R(x + 4, y + 7, 4, 2, '#fff0d6');
-      } else {
-        s += R(x + 1, y + 2, 8, 12, p.color) + R(x + 1, y + 2, 8, 2, '#4b3020') + R(x + 2, y + 6, 6, 4, '#fff0d6') + R(x + 3, y + 7, 4, 2, p.color);
-      }
-      slot++;
-    }
-  }
-  if (slot === 0) {
-    s += R(shelfX + 8, shelfRows[0] + 8, 38, 7, '#c7a777');
-    s += R(shelfX + 12, shelfRows[0] + 5, 30, 2, '#a9875a');
-  }
-  // Right-hand side: fridge when purchased, wooden delivery crates otherwise.
-  if (owned.has('fridge')) {
-    s += R(230, 52, 62, 105, '#315d7a') + R(234, 56, 54, 97, '#d4e5e7') + R(234, 56, 54, 8, '#5b93a7');
-    s += R(238, 66, 46, 2, '#9fc4cb') + R(238, 91, 46, 2, '#9fc4cb') + R(238, 117, 46, 2, '#9fc4cb');
-    const coldCount = Math.min(9, (state.inventory.cola ?? 0) + (state.inventory.juice ?? 0));
-    for (let i = 0; i < coldCount; i++) {
-      const x = 238 + (i % 3) * 14, y = 73 + Math.floor(i / 3) * 26;
-      const bottle = i % 2 === 0;
-      s += bottle ? R(x + 2, y, 4, 3, '#473024') + R(x + 1, y + 3, 6, 14, i % 3 ? '#db7025' : '#a72f25') + R(x + 2, y + 8, 4, 3, '#fff0d6')
-        : R(x, y + 3, 8, 14, '#e77c2d') + R(x, y + 7, 8, 4, '#fff0d6');
-    }
-    s += R(282, 90, 3, 27, '#315d7a');
-  } else {
-    for (const [x, y] of [[235, 129], [260, 129], [247, 106]]) {
-      s += R(x, y, 24, 21, '#a66a36') + R(x, y, 24, 4, '#714322') + R(x + 3, y + 8, 18, 3, '#714322') + R(x + 10, y + 4, 3, 14, '#d69b54');
-    }
-    s += R(231, 63, 59, 31, '#d5b989') + R(236, 68, 49, 21, '#c5a36d') + R(239, 71, 43, 2, '#b48b56');
-  }
-  // A blue plastic chair, weighing scale and a proper timber counter.
-  s += R(19, 143, 5, 17, '#315d7a') + R(39, 143, 5, 17, '#315d7a') + R(17, 139, 29, 5, '#77afc7') + R(17, 124, 5, 17, '#315d7a') + R(41, 124, 5, 17, '#315d7a') + R(17, 123, 29, 5, '#77afc7');
-  s += R(116, 130, 158, 9, '#58351f') + R(120, 139, 150, 25, '#986331') + R(124, 143, 142, 3, '#74471f') + R(124, 152, 142, 3, '#74471f');
-  s += R(239, 115, 23, 13, '#9b9b9b') + R(245, 108, 10, 7, '#6e6e73') + R(239, 103, 23, 5, '#e5b33a') + R(243, 104, 15, 2, '#fff1bd');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 190" shape-rendering="crispEdges" class="scene-svg" aria-hidden="true">${s}</svg>`;
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 316" preserveAspectRatio="none" role="img" aria-label="واجهة محل بقالة مصرية مرسومة بتفاصيل، ${owned.has('fridge') ? 'وثلاجة العرض مضافة' : 'وصناديق البضاعة أمام المحل'}">${s}</svg>`;
 }
 
-/** Cairo/Egyptian hara: balconies, laundry, satellite dishes, a corner café and shopfront. */
 export function alleySceneSvg() {
   let s = '';
   s += R(0, 0, 320, 200, '#f4dcae') + R(0, 0, 320, 45, '#f3c77f');
