@@ -265,7 +265,7 @@ export function shopSceneSvg(state, productList) {
     s += R(298, 222, 2, 27, '#754822') + R(298, 254, 2, 28, '#754822');
   }
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 316" preserveAspectRatio="none" role="img" aria-label="واجهة محل بقالة مصرية مرسومة بتفاصيل، ${owned.has('fridge') ? 'وثلاجة العرض مضافة' : 'وصناديق البضاعة أمام المحل'}">${s}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" class="scene-svg" viewBox="0 0 320 316" preserveAspectRatio="none" role="img" aria-label="واجهة محل بقالة مصرية مرسومة بتفاصيل، ${owned.has('fridge') ? 'وثلاجة العرض مضافة' : 'وصناديق البضاعة أمام المحل'}">${s}</svg>`;
 }
 
 export function alleySceneSvg() {
