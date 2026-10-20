@@ -217,7 +217,6 @@ function shopViewHtml() {
   const shortages = orderShortages(state, order);
   const total = potentialOrderRevenue(state, order);
   const sat = satisfactionFor(state, order);
-  const signText = state.upgrades.includes('sign') || state.upgrades.includes('storefront') ? 'بقالة المعلّم' : 'محل بقالة صغير';
   const unlocked = PRODUCTS.filter((p) => isProductUnlocked(p, state.upgrades));
 
   const moodHint = sat.mood === 'unhappy'
@@ -229,9 +228,11 @@ function shopViewHtml() {
   return `
   <div class="scene-wrap" role="img" aria-label="محل البقالة بتاعك في الحارة: رفوف، كاونتر، ${state.upgrades.includes('fridge') ? 'ثلاجة عرض' : 'كراتين بضاعة'}.">
     ${shopSceneSvg(state, unlocked)}
-    <div class="shop-sign">${esc(signText)}</div>
-    <div class="scene-player">${characterSprite('player')}</div>
-    <div class="scene-customer bob">${characterSprite(customer.sprite)}</div>
+    <div class="scene-status" aria-label="حالة المحل">
+      <span class="scene-status__live"><i aria-hidden="true"></i> فاتح دلوقتي</span>
+      <span>📦 المخزون: ${fmt(totalUnits(state))} قطعة</span>
+      ${state.upgrades.includes('fridge') ? '<span>❄️ ثلاجة العرض شغالة</span>' : ''}
+    </div>
   </div>
 
   <section class="card" aria-label="الزبون الحالي">
