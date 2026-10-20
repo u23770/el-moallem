@@ -2,174 +2,203 @@
 // Same maps are exported to standalone .svg asset files by scripts/generate-sprites.mjs.
 
 export const PALETTE = {
-  S: '#e0a878', D: '#b87f4e', H: '#33241c', W: '#f4ead8', K: '#2b2b33',
-  G: '#5a7d4a', g: '#3e5c33', Y: '#d9a821', R: '#b3552f', B: '#3e6d96',
-  b: '#7fa8c9', T: '#d8c8a3', t: '#b3a077', M: '#7a2f2f', P: '#6b4a7a',
-  O: '#e07a2e', A: '#9a9aa2', C: '#efe6d0', N: '#4a3423',
+  S: '#d99b6b', D: '#a96742', H: '#302018', W: '#fff4df', K: '#24252b',
+  G: '#4e7842', g: '#31572f', Y: '#e6b63c', R: '#b9462e', B: '#347ca1',
+  b: '#7bb8d0', T: '#e3d0aa', t: '#b39a6b', M: '#762d31', P: '#77518c',
+  O: '#e77c2d', A: '#96979a', C: '#f4e6cb', N: '#503322',
+  L: '#e9c59a', Q: '#ffffff', X: '#4b3022', U: '#6e9b58', V: '#c6a0a0',
 };
 
-// Each map: 16 wide x 20 tall (Karim deliberately shorter). '.' = transparent.
+// Original hand-drawn pixel maps, 20 x 24. '.' stays transparent.
 export const SPRITE_MAPS = {
-  // Sayed: elder, white taqiya cap, grey moustache, beige galabeya
+  // عم سيد: white taqiya, grey moustache, beige galabeya and sandals.
   sayed: [
-    '................',
-    '.....CCCCCC.....',
-    '....CCCCCCCC....',
-    '....SSSSSSSS....',
-    '....SKSSSSKS....',
-    '....SSSSSSSS....',
-    '.....AAAAAA.....',
-    '......SSSS......',
-    '....TTTTTTTT....',
-    '...TTTTTTTTTT...',
-    '...TTtTTTTtTT...',
-    '..STTTTTTTTS....',
-    '..STTTTTTTT.....',
-    '...TTTTTTTT.....',
-    '...TTTTTTTT.....',
-    '...tTTTTTTt.....',
-    '...TTTTTTTT.....',
-    '...TTT..TTT.....',
-    '..NNN....NNN....',
-    '................',
+    '....................',
+    '.......CCCCCC.......',
+    '......CQQQQQQC......',
+    '......CCCCCCCC......',
+    '......SSSSSSSS......',
+    '.....SSSSSSSSSS.....',
+    '.....SKSSSSKSSS.....',
+    '.....SSSSSSSSSS.....',
+    '......SSSAAAS.......',
+    '......SSSSSSS.......',
+    '.....TTTTTTTTTT.....',
+    '....TTTTTTTTTTTT....',
+    '....TTtTTTTTTtTT....',
+    '...STTTTTTTTTTTS....',
+    '...STTTTTTTTTTTS....',
+    '...STTTTTTTTTTTS....',
+    '....TTTTTTTTTTTT....',
+    '....TTTTTTTTTTTT....',
+    '....TtTTTTTTtTTT....',
+    '....TTTTTTTTTTTT....',
+    '....NNNN....NNNN....',
+    '....NNNN....NNNN....',
+    '....NNNN....NNNN....',
+    '....................',
   ],
-  // Ragab: bald wholesaler, green shirt, white apron, big smile energy
+  // عم رجب: bald wholesaler, green galabeya, white apron and sturdy shoes.
   ragab: [
-    '................',
-    '.....SSSSSS.....',
-    '....SSSSSSSS....',
-    '...HSSSSSSSH....',
-    '...SKSSSSKS.....',
-    '....SSSSSSSS....',
-    '.....HHHHHH.....',
-    '.....SSSSSS.....',
-    '...GGGGGGGGGG...',
-    '..GGGGGGGGGGGG..',
-    '..GGWWWWWWWWGG..',
-    '.SG.WWWWWWWW.GS.',
-    '.S..WWWWWWWW..S.',
-    '....WWWWWWWW....',
-    '....WWWWWWWW....',
-    '...KKKKKKKKK....',
-    '...KKK..KKKK....',
-    '...KK....KKK....',
-    '..NNN.....NNN...',
-    '................',
+    '....................',
+    '......SSSSSSSS......',
+    '.....SSSSSSSSSS.....',
+    '....HSSSSSSSSSSH....',
+    '....SKSSSSSSKSSS....',
+    '.....SSSSSSSSSS.....',
+    '......HHHHHHHH......',
+    '......SSSSSSSS......',
+    '....GGGGGGGGGGGG....',
+    '...GGGGGGGGGGGGGG...',
+    '...GGGGWWWWWWGGGG...',
+    '..SGGGGWWWWWWGGGGS..',
+    '..SGGGGWWWWWWGGGGS..',
+    '...GGGGWWWWWWGGGG...',
+    '....GGGGWWWWGGGG....',
+    '....GGGGWWWWGGGG....',
+    '....GGGGGGGGGGGG....',
+    '....GGGGgGGgGGGG....',
+    '....GGGGGGGGGGGG....',
+    '....NNNN....NNNN....',
+    '....NNNN....NNNN....',
+    '....NNNN....NNNN....',
+    '....................',
+    '....................',
   ],
-  // Hassan: young rival, dark hair, blue shirt
+  // حسن المنافس: dark swept hair, blue shirt and visible collar.
   Hassan: [
-    '................',
-    '....HHHHHHHH....',
-    '...HHHHHHHHHH...',
-    '...HSSSSSSSSH...',
-    '....SKSSSSKS....',
-    '....SSSSSSSS....',
-    '....SSSHHSSS....',
-    '......SSSS......',
-    '...BBBBBBBBBB...',
-    '..BBBBBBBBBBBB..',
-    '..BBBbBBBBbBBB..',
-    '.SB.BBBBBBBB.BS.',
-    '.S..BBBBBBBB..S.',
-    '....BBBBBBBB....',
-    '...KKKKKKKKK....',
-    '...KKKKKKKKK....',
-    '...KKK..KKKK....',
-    '...KK....KKK....',
-    '..WWW.....WWW...',
-    '................',
+    '....................',
+    '.....HHHHHHHHHH.....',
+    '....HHHHHHHHHHHH....',
+    '....HHHHHHHHHHHH....',
+    '....HSSSSSSSSSSH....',
+    '.....SSSSSSSSSS.....',
+    '.....SKSSSSKSSS.....',
+    '.....SSSSSSSSSS.....',
+    '......SSSHHSSS......',
+    '......SSSSSSSS......',
+    '....BBBBBBBBBBBB....',
+    '...BBBBBBBBBBBBBB...',
+    '...BBBbBBBBbBBBBB...',
+    '..SB.BBBBBBBBBB.BS..',
+    '..SB.BBBBBBBBBB.BS..',
+    '...BBBBBBBBBBBBBB...',
+    '....BBBBBBbBBBBB....',
+    '....BBBBBBBBBBBB....',
+    '....BBBBBB.BBBBB....',
+    '....KKKKKK.KKKKK....',
+    '....KKKKKK.KKKKK....',
+    '...NNNNN....NNNNN...',
+    '...NNNNN....NNNNN...',
+    '....................',
   ],
-  // Umm Ahmed: black melaya/hijab, kind face, purple dress hem
+  // الحاجة أم أحمد: black melaya, warm face and plum dress.
   umm_ahmed: [
-    '................',
-    '.....KKKKKK.....',
-    '....KKKKKKKK....',
-    '...KKSSSSSSKK...',
-    '...KKSKSSKSKK...',
-    '...KKSSSSSSKK...',
-    '...KKSSHHSSKK...',
-    '....KKKKKKKK....',
-    '...KKKKKKKKK....',
-    '..KKKKKKKKKKK...',
-    '..KKKKKKKKKKK...',
-    '.SKKKKKKKKKKKS..',
-    '.S.KKKKKKKKKK.S.',
-    '...KKKKKKKKK....',
-    '...PPPPPPPPP....',
-    '...PPPPPPPPP....',
-    '..PPPPPPPPPPP...',
-    '..PPP.PPP.PPP...',
-    '..NNN.....NNN...',
-    '................',
+    '....................',
+    '.......KKKKKK.......',
+    '......KKKKKKKK......',
+    '.....KKKKKKKKKK.....',
+    '....KKSSSSSSSSKK....',
+    '....KKSSSSSSSSKK....',
+    '....KKSKSSKSSSKK....',
+    '....KKSSSSSSSSKK....',
+    '....KKSSHHSSSSKK....',
+    '.....KKKKKKKKKK.....',
+    '....KKKKKKKKKKKK....',
+    '...KKKKKKKKKKKKKK...',
+    '...KKKKKKKKKKKKKK...',
+    '..SKKKKKKKKKKKKKS...',
+    '..SKKKKKKKKKKKKKS...',
+    '...KKKKKKKKKKKKKK...',
+    '....KKKKKKKKKKKK....',
+    '....PPPPPPPPPPPP....',
+    '...PPPPPPPPPPPPPP...',
+    '...PPPPPPPPPPPPPP...',
+    '...PPP.PPPP.PPPPP...',
+    '....NNNN....NNNN....',
+    '....NNNN....NNNN....',
+    '....................',
   ],
-  // Mahmoud: teacher with glasses, mustard sweater
+  // أستاذ محمود: glasses, mustard sweater, collared shirt and dark trousers.
   Mahmoud: [
-    '................',
-    '....HHHHHHHH....',
-    '...HHSSSSSSHH...',
-    '....SSSSSSSS....',
-    '....KKKKKKKK....',
-    '....SKSSSSKS....',
-    '....SSSSSSSS....',
-    '.....SSSSSS.....',
-    '...YYYYYYYYYY...',
-    '..YYYYYYYYYYYY..',
-    '..YYYWYYYYWYYY..',
-    '.SY.YYYYYYYY.YS.',
-    '.S..YYYYYYYY..S.',
-    '....YYYYYYYY....',
-    '...NNNNNNNNN....',
-    '...NNNNNNNNN....',
-    '...NNN..NNNN....',
-    '...NN....NNN....',
-    '..KKK.....KKK...',
-    '................',
+    '....................',
+    '.....HHHHHHHHHH.....',
+    '....HHHHHHHHHHHH....',
+    '....HHSSSSSSSSHH....',
+    '.....SSSSSSSSSS.....',
+    '....KKKKSSKKKKSS....',
+    '....SKSSSSSSSSKS....',
+    '.....SSSSSSSSSS.....',
+    '....YYYYYYYYYYYY....',
+    '...YYYYYYYYYYYYYY...',
+    '...YYYQYYYYYYQYYY...',
+    '..SY.YYYYYYYYYY.YS..',
+    '..SY.YYYYYYYYYY.YS..',
+    '...YYYYYYYYYYYYYY...',
+    '....YYYYYBBYYYYY....',
+    '....YYYYBBBBYYYY....',
+    '....YYYYYYYYYYYY....',
+    '....YYYYgYYgYYYY....',
+    '....NNNNNNNNNNNN....',
+    '....NNNNNNNNNNNN....',
+    '....NNNNN..NNNNN....',
+    '....NNNNN..NNNNN....',
+    '...NNNNNN..NNNNNN...',
+    '....................',
   ],
-  // Karim: small kid, red shirt, blue shorts (shorter sprite)
+  // كريم الصغير: shorter proportions, unruly hair, red tee and blue shorts.
   Karim: [
-    '................',
-    '................',
-    '................',
-    '................',
-    '....HHHHHHH.....',
-    '...HHHHHHHHH....',
-    '...SSSSSSSSS....',
-    '...SKSSSSKS.....',
-    '....SSSSSSS.....',
-    '...SSSHHHSSS....',
-    '...RRRRRRRRR....',
-    '..RRRRRRRRRRR...',
-    '.SRRRRRRRRRR.S..',
-    '.S.RRRRRRRR..S..',
-    '...BBBBBBBB.....',
-    '...BBB..BBB.....',
-    '...SS....SS.....',
-    '...SS....SS.....',
-    '..RRR....RRR....',
-    '................',
+    '....................',
+    '....................',
+    '......HHHHHHHH......',
+    '.....HHHHHHHHHH.....',
+    '.....HSSSSSSSSSH....',
+    '......SSSSSSSSSS....',
+    '......SKSSSSKSSS....',
+    '......SSSSSSSSSS....',
+    '.......SSSHHSSS.....',
+    '......SSSSSSSSSS....',
+    '.....RRRRRRRRRRRR...',
+    '....RRRRRRRRRRRRRR..',
+    '....RRRRRYYRRRRRRR..',
+    '...SRRRRRRRRRRRRRS..',
+    '...SRRRRRRRRRRRRRS..',
+    '....RRRRRRRRRRRRRR..',
+    '.....BBBBBBBBBBBB...',
+    '.....BBBBBBBBBBBB...',
+    '.....BBB....BBBB....',
+    '.....SSS....SSSS....',
+    '....NNNN....NNNN....',
+    '....NNNN....NNNN....',
+    '....................',
+    '....................',
   ],
-  // The player: El Moallem behind his counter, green galabeya, mustard cap
+  // The player: green galabeya, gold cap and a small shop apron detail.
   player: [
-    '................',
-    '.....YYYYYY.....',
-    '....YYYYYYYY....',
-    '....SSSSSSSS....',
-    '....SKSSSSKS....',
-    '....SSSSSSSS....',
-    '.....HHHHHH.....',
-    '......SSSS......',
-    '...GGGGGGGGG....',
-    '..GGGGGGGGGGG...',
-    '..GgGGGGGGgGG...',
-    '.SG.GGGGGGGG.GS.',
-    '.S..GGGGGGGG..S.',
-    '....GGGGGGGG....',
-    '....GGGGGGGG....',
-    '....gGGGGGGg....',
-    '....GGGGGG......',
-    '....GGG.GGG.....',
-    '..NNN....NNN....',
-    '................',
+    '....................',
+    '.......YYYYYY.......',
+    '......YYYYYYYY......',
+    '......YYYYYYYY......',
+    '......SSSSSSSS......',
+    '.....SSSSSSSSSS.....',
+    '.....SKSSSSKSSS.....',
+    '.....SSSSSSSSSS.....',
+    '......SSSHHSSS......',
+    '......SSSSSSSS......',
+    '....GGGGGGGGGGGG....',
+    '...GGGGGGGGGGGGGG...',
+    '...GGGgGGGGGgGGGG...',
+    '..SG.GGGGGGGGGG.GS..',
+    '..SG.GGGGWWGGGG.GS..',
+    '...GGGGGGWWGGGGGG...',
+    '....GGGGGGGGGGGG....',
+    '....GGGGGGGGGGGG....',
+    '....GGGGgGGgGGGG....',
+    '....GGGGGGGGGGGG....',
+    '....NNNN....NNNN....',
+    '....NNNN....NNNN....',
+    '....NNNN....NNNN....',
+    '....................',
   ],
 };
 
@@ -215,35 +244,38 @@ export function productSprite(product, className = 'product-icon') {
 }
 
 const R = (x, y, w, h, fill, op = '') => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${fill}"${op ? ` opacity="${op}"` : ''}/>`;
+const C = (x, y, w, h, fill, stroke = '#4a3020') =>
+  R(x, y, w, h, fill) + R(x, y, w, 1, stroke) + R(x, y + h - 1, w, 1, stroke);
 
-/** Shop interior scene (320x190). Shelves visually fill with real stock levels. */
+/** Egyptian corner-shop scene. Stock, fridge and renovations react to the actual game state. */
 export function shopSceneSvg(state, productList) {
   const owned = new Set(state.upgrades);
   let s = '';
-  // wall + worn plaster patches + brick strip
-  s += R(0, 0, 320, 190, '#e6cf9f');
-  s += R(0, 0, 320, 26, '#caa26a');
-  s += R(14, 34, 34, 20, '#dcc08d') + R(268, 40, 30, 16, '#dcc08d') + R(150, 30, 22, 12, '#dcc08d');
-  for (let x = 0; x < 320; x += 16) s += R(x, 158, 14, 6, '#b3552f') + R(x + 8, 166, 14, 6, '#a04a28');
-  s += R(0, 172, 320, 18, '#8a6a44'); // floor
-  for (let x = 0; x < 320; x += 20) s += R(x, 172, 2, 18, '#75572f');
-  // awning stripes (green/cream) — nicer after storefront renovation
-  const awnA = owned.has('storefront') ? '#b3552f' : '#5a7d4a';
-  for (let x = 0; x < 320; x += 20) s += R(x, 24, 10, 8, awnA) + R(x + 10, 24, 10, 8, '#f4ead8');
-  // sign board (Arabic text is an HTML overlay in the app)
-  s += R(96, 2, 128, 20, owned.has('sign') || owned.has('storefront') ? '#3e5c33' : '#8a6a44');
-  s += R(100, 5, 120, 14, owned.has('sign') || owned.has('storefront') ? '#f4ead8' : '#e6cf9f');
-  // hanging lamps
-  for (const lx of [52, 160, 268]) {
-    s += R(lx, 26, 2, 12, '#2b2118') + R(lx - 4, 38, 10, 4, '#d9a821') + R(lx - 2, 42, 6, 5, '#ffe9a8');
+  // Sun-warmed plaster with a little wall wear and a patterned tile floor.
+  s += R(0, 0, 320, 190, '#e8d4aa') + R(0, 0, 320, 24, '#c9a16b');
+  s += R(10, 42, 28, 9, '#d9bd8d') + R(258, 35, 45, 12, '#d9bd8d') + R(64, 52, 18, 5, '#d9bd8d');
+  for (let x = 0; x < 320; x += 16) {
+    s += R(x, 24, 8, 8, '#b74f2b') + R(x + 8, 24, 8, 8, '#fff0d6');
+    s += R(x, 160, 8, 6, x % 32 ? '#a84a2b' : '#bd5b32') + R(x + 8, 166, 8, 6, '#f2dfb8');
   }
-  // shelves (2 rows; third row appears with extra-shelves upgrade)
-  const shelfRows = owned.has('shelves') ? [58, 88, 118] : [66, 102];
-  const shelfX = 16, shelfW = 196;
+  s += R(0, 172, 320, 18, '#8d6b43');
+  for (let x = 0; x < 320; x += 20) s += R(x, 172, 2, 18, '#6d4b2d');
+  // Painted shop sign and old-fashioned hanging lamps.
+  const signColor = owned.has('sign') || owned.has('storefront') ? '#31572f' : '#795231';
+  s += R(91, 2, 138, 21, '#4a3020') + R(95, 4, 130, 17, signColor) + R(99, 7, 122, 11, '#f6e6c6');
+  for (const lx of [50, 160, 270]) {
+    s += R(lx, 30, 2, 10, '#4a3020') + R(lx - 5, 39, 12, 4, '#c18a27') + R(lx - 3, 43, 8, 5, '#ffe6a0');
+    s += R(lx - 1, 46, 4, 3, '#fff1bd', '.3');
+  }
+  // Shelves use a warm wooden frame, visible depth and product-specific silhouettes.
+  const shelfRows = owned.has('shelves') ? [57, 84, 111] : [64, 101];
+  const shelfX = 14, shelfW = 198;
   for (const y of shelfRows) {
-    s += R(shelfX, y + 16, shelfW, 4, '#7c4a26') + R(shelfX, y + 20, shelfW, 2, '#5d371b');
+    s += R(shelfX - 2, y - 2, shelfW + 4, 3, '#4b3020');
+    s += R(shelfX, y, shelfW, 17, '#d9b98a');
+    s += R(shelfX, y + 16, shelfW, 4, '#80502c') + R(shelfX, y + 20, shelfW, 2, '#57351f');
+    for (let x = shelfX + 4; x < shelfX + shelfW; x += 24) s += R(x, y + 2, 1, 13, '#bd9564');
   }
-  // products on shelves: up to N pixel blocks per product based on real qty
   let slot = 0;
   const perRow = 12;
   for (const p of productList) {
@@ -251,67 +283,93 @@ export function shopSceneSvg(state, productList) {
     const blocks = Math.max(0, Math.min(4, Math.ceil(qty / 4)));
     for (let i = 0; i < blocks; i++) {
       const row = Math.min(shelfRows.length - 1, Math.floor(slot / perRow));
-      const x = shelfX + 6 + (slot % perRow) * 16;
-      const y = shelfRows[row] + 4;
-      s += R(x, y, 9, 12, p.color) + R(x, y + 5, 9, 3, '#f4ead8') + R(x + 1, y + 1, 2, 10, '#ffffff', '.45');
+      const x = shelfX + 5 + (slot % perRow) * 16;
+      const y = shelfRows[row] + 2;
+      if (p.icon === 'bottle') {
+        s += R(x + 3, y, 3, 3, '#463022') + R(x + 2, y + 3, 5, 2, p.color) + R(x + 1, y + 5, 7, 9, p.color) + R(x + 2, y + 8, 5, 3, '#fff0d6') + R(x + 2, y + 5, 1, 7, '#ffffff', '.5');
+      } else if (p.icon === 'bag') {
+        s += R(x + 1, y + 2, 8, 12, p.color) + R(x + 1, y + 2, 8, 2, '#5b3823') + R(x + 2, y + 7, 6, 3, '#fff0d6') + R(x + 3, y + 3, 1, 8, '#ffffff', '.45');
+      } else if (p.icon === 'bar') {
+        s += R(x, y + 5, 10, 8, '#4b3020') + R(x + 1, y + 4, 8, 8, p.color) + R(x + 1, y + 5, 2, 6, '#e8c35b') + R(x + 4, y + 7, 4, 2, '#fff0d6');
+      } else {
+        s += R(x + 1, y + 2, 8, 12, p.color) + R(x + 1, y + 2, 8, 2, '#4b3020') + R(x + 2, y + 6, 6, 4, '#fff0d6') + R(x + 3, y + 7, 4, 2, p.color);
+      }
       slot++;
     }
   }
-  if (slot === 0) s += R(shelfX + 8, shelfRows[0] + 8, 40, 8, '#c9ae77'); // bare shelf hint
-  // right side: fridge (upgrade) or crates
+  if (slot === 0) {
+    s += R(shelfX + 8, shelfRows[0] + 8, 38, 7, '#c7a777');
+    s += R(shelfX + 12, shelfRows[0] + 5, 30, 2, '#a9875a');
+  }
+  // Right-hand side: fridge when purchased, wooden delivery crates otherwise.
   if (owned.has('fridge')) {
-    s += R(228, 52, 62, 104, '#7fa8c9') + R(232, 56, 54, 96, '#cfe3f2') + R(232, 56, 54, 8, '#3e6d96');
+    s += R(230, 52, 62, 105, '#315d7a') + R(234, 56, 54, 97, '#d4e5e7') + R(234, 56, 54, 8, '#5b93a7');
+    s += R(238, 66, 46, 2, '#9fc4cb') + R(238, 91, 46, 2, '#9fc4cb') + R(238, 117, 46, 2, '#9fc4cb');
     const coldCount = Math.min(9, (state.inventory.cola ?? 0) + (state.inventory.juice ?? 0));
     for (let i = 0; i < coldCount; i++) {
-      const x = 236 + (i % 3) * 16, y = 74 + Math.floor(i / 3) * 26;
-      s += R(x, y, 7, 16, i % 2 ? '#e07020' : '#8c2820') + R(x, y + 6, 7, 3, '#f4ead8');
+      const x = 238 + (i % 3) * 14, y = 73 + Math.floor(i / 3) * 26;
+      const bottle = i % 2 === 0;
+      s += bottle ? R(x + 2, y, 4, 3, '#473024') + R(x + 1, y + 3, 6, 14, i % 3 ? '#db7025' : '#a72f25') + R(x + 2, y + 8, 4, 3, '#fff0d6')
+        : R(x, y + 3, 8, 14, '#e77c2d') + R(x, y + 7, 8, 4, '#fff0d6');
     }
-    s += R(234, 88, 50, 2, '#7fa8c9') + R(234, 114, 50, 2, '#7fa8c9') + R(282, 92, 3, 26, '#2b2118');
+    s += R(282, 90, 3, 27, '#315d7a');
   } else {
-    for (const [x, y] of [[236, 128], [256, 128], [246, 106]]) {
-      s += R(x, y, 24, 20, '#a06a35') + R(x, y, 24, 4, '#7c4a26') + R(x + 3, y + 8, 18, 3, '#7c4a26');
+    for (const [x, y] of [[235, 129], [260, 129], [247, 106]]) {
+      s += R(x, y, 24, 21, '#a66a36') + R(x, y, 24, 4, '#714322') + R(x + 3, y + 8, 18, 3, '#714322') + R(x + 10, y + 4, 3, 14, '#d69b54');
     }
-    s += R(226, 66, 70, 30, '#dcc08d') + R(232, 72, 58, 18, '#c9ae77'); // empty wall space waiting for a fridge
+    s += R(231, 63, 59, 31, '#d5b989') + R(236, 68, 49, 21, '#c5a36d') + R(239, 71, 43, 2, '#b48b56');
   }
-  // plastic chair + scale + counter
-  s += R(22, 140, 4, 18, '#3e6d96') + R(38, 140, 4, 18, '#3e6d96') + R(20, 138, 24, 5, '#7fa8c9') + R(20, 124, 24, 5, '#7fa8c9') + R(20, 124, 4, 14, '#3e6d96') + R(40, 124, 4, 14, '#3e6d96');
-  s += R(120, 128, 150, 10, '#7c4a26') + R(120, 138, 150, 26, '#8a5a30') + R(124, 142, 142, 3, '#6e4521') + R(124, 150, 142, 3, '#6e4521');
-  s += R(238, 114, 22, 14, '#9a9aa2') + R(246, 106, 6, 8, '#6f6f78') + R(238, 102, 22, 4, '#d9a821'); // weighing scale
+  // A blue plastic chair, weighing scale and a proper timber counter.
+  s += R(19, 143, 5, 17, '#315d7a') + R(39, 143, 5, 17, '#315d7a') + R(17, 139, 29, 5, '#77afc7') + R(17, 124, 5, 17, '#315d7a') + R(41, 124, 5, 17, '#315d7a') + R(17, 123, 29, 5, '#77afc7');
+  s += R(116, 130, 158, 9, '#58351f') + R(120, 139, 150, 25, '#986331') + R(124, 143, 142, 3, '#74471f') + R(124, 152, 142, 3, '#74471f');
+  s += R(239, 115, 23, 13, '#9b9b9b') + R(245, 108, 10, 7, '#6e6e73') + R(239, 103, 23, 5, '#e5b33a') + R(243, 104, 15, 2, '#fff1bd');
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 190" shape-rendering="crispEdges" class="scene-svg" aria-hidden="true">${s}</svg>`;
 }
 
-/** Alley / neighborhood backdrop (320x200). Buildings, balconies, cafe corner. */
+/** Cairo/Egyptian hara: balconies, laundry, satellite dishes, a corner café and shopfront. */
 export function alleySceneSvg() {
   let s = '';
-  s += R(0, 0, 320, 200, '#f0d9a8'); // warm afternoon sky
-  s += R(0, 0, 320, 46, '#eec27e') + R(282, 10, 20, 20, '#ffdf7e') + R(286, 6, 12, 28, '#ffdf7e');
-  // back buildings
-  s += R(6, 40, 86, 118, '#d9b57e') + R(100, 26, 96, 132, '#cfa96d') + R(204, 44, 110, 114, '#e0bd85');
-  // windows with shutters + railed balconies + doors at street level
-  const win = (x, y, c = '#3e6d96') =>
-    R(x - 3, y, 3, 18, '#7a4a26') + R(x + 14, y, 3, 18, '#7a4a26')           // shutters
-    + R(x, y, 14, 18, '#5d4632') + R(x + 2, y + 2, 10, 14, c)
-    + R(x + 6, y + 2, 2, 14, '#5d4632')                                       // window mullion
-    + R(x - 4, y + 19, 22, 3, '#4a3320')                                      // balcony slab
-    + R(x - 4, y + 12, 22, 2, '#4a3320')                                      // railing top
-    + R(x - 4, y + 12, 2, 8, '#4a3320') + R(x + 4, y + 12, 2, 8, '#4a3320')
-    + R(x + 12, y + 12, 2, 8, '#4a3320') + R(x + 16, y + 12, 2, 8, '#4a3320');
-  s += win(20, 56) + win(56, 56, '#7fa8c9') + win(20, 98, '#7fa8c9') + win(56, 98);
-  s += win(116, 44) + win(152, 44, '#7fa8c9') + win(116, 86, '#7fa8c9') + win(152, 86);
-  s += win(222, 60, '#7fa8c9') + win(262, 60) + win(222, 100) + win(262, 100, '#7fa8c9');
-  // laundry line
-  s += R(90, 66, 120, 2, '#5d4632') + R(102, 68, 12, 14, '#b3552f') + R(126, 68, 12, 12, '#f4ead8') + R(150, 68, 12, 15, '#3e6d96') + R(174, 68, 12, 12, '#d9a821');
-  // doors + a small shop awning at street level
-  s += R(30, 132, 18, 26, '#6e4521') + R(44, 144, 3, 3, '#d9a821');
-  s += R(132, 132, 18, 26, '#3e5c33') + R(146, 144, 3, 3, '#d9a821');
-  for (let x = 214; x < 294; x += 16) s += R(x, 126, 8, 7, '#b3552f') + R(x + 8, 126, 8, 7, '#f4ead8');
-  s += R(222, 134, 64, 24, '#8a5a30') + R(226, 138, 56, 16, '#5d371b');
-  // street + cafe chairs/table + street lamp
-  s += R(0, 158, 320, 42, '#b08d5a');
-  for (let x = 0; x < 320; x += 26) s += R(x, 176, 20, 3, '#96754a');
-  s += R(24, 150, 4, 26, '#2b2118') + R(18, 140, 16, 6, '#2b2118') + R(21, 146, 10, 8, '#ffe9a8');
-  s += R(262, 168, 34, 4, '#f4ead8') + R(276, 172, 4, 12, '#5d4632'); // cafe table
-  s += R(246, 166, 10, 14, '#3e6d96') + R(302, 166, 10, 14, '#3e6d96');
-  s += R(272, 162, 6, 6, '#d9a821'); // tea glass catching light
+  s += R(0, 0, 320, 200, '#f4dcae') + R(0, 0, 320, 45, '#f3c77f');
+  // hazy sun and distant roofline.
+  s += R(278, 8, 25, 25, '#ffe8a0') + R(284, 2, 13, 37, '#ffe8a0');
+  s += R(0, 40, 320, 8, '#a97849');
+  // Three close-set buildings, plaster trim and roof parapets.
+  s += R(5, 42, 88, 116, '#d4ad78') + R(5, 42, 88, 5, '#8e6742');
+  s += R(99, 27, 100, 131, '#c8a16b') + R(99, 27, 100, 6, '#8a6040');
+  s += R(204, 45, 111, 113, '#e1bf89') + R(204, 45, 111, 5, '#a77b4d');
+  // Wall scuffs and simple painted floor levels.
+  for (const [x,y,w] of [[12,86,10],[75,120,8],[109,72,12],[179,113,9],[287,86,12],[221,111,8]]) s += R(x,y,w,2,'#b8915d');
+  const win = (x, y, glass = '#568ba5') => {
+    s += R(x - 3, y, 20, 22, '#7c4f2e') + R(x, y + 2, 14, 16, '#4c3527') + R(x + 2, y + 4, 10, 12, glass);
+    s += R(x + 6, y + 4, 2, 12, '#4c3527') + R(x + 2, y + 9, 10, 2, '#4c3527');
+    s += R(x - 5, y + 21, 24, 3, '#4b3020') + R(x - 5, y + 14, 24, 2, '#4b3020');
+    for (const dx of [-4, 3, 10, 17]) s += R(x + dx, y + 14, 2, 8, '#4b3020');
+    s += R(x - 3, y - 2, 20, 2, '#f1d8ac');
+  };
+  [[18,58,'#477f99'],[56,58,'#8ab6c8'],[18,100,'#8ab6c8'],[56,100,'#477f99'],
+   [112,45,'#8ab6c8'],[154,45,'#477f99'],[112,88,'#477f99'],[154,88,'#8ab6c8'],
+   [219,61,'#8ab6c8'],[263,61,'#477f99'],[219,102,'#477f99'],[263,102,'#8ab6c8']]
+    .forEach(([x,y,c]) => win(x,y,c));
+  // Satellite dishes, water tanks and laundry make the skyline unmistakably local.
+  s += R(28, 34, 22, 4, '#5b4936') + R(33, 26, 13, 8, '#77736b') + R(38, 21, 2, 8, '#5b4936');
+  s += R(137, 15, 26, 12, '#6f7775') + R(141, 11, 18, 4, '#848a85') + R(146, 8, 8, 3, '#5b4936');
+  s += R(233, 34, 20, 11, '#7d827c') + R(238, 30, 11, 4, '#93978d');
+  // Laundry line with varied fabric and visible pegs.
+  s += R(84, 69, 130, 2, '#4b3020');
+  for (const [x,w,h,c] of [[94,13,15,'#b94f32'],[119,15,12,'#fff0d6'],[147,13,17,'#347ca1'],[173,16,13,'#e6b63c'],[198,10,15,'#77518c']]) {
+    s += R(x + 4, 67, 2, 3, '#4b3020') + R(x, 71, w, h, c) + R(x + 2, 73, 2, h - 4, '#ffffff', '.25');
+  }
+  // Ground-floor doors and a tiny corner kiosk with striped awning.
+  s += R(28, 132, 20, 26, '#674122') + R(43, 145, 3, 3, '#e6b63c') + R(31, 137, 13, 2, '#8d6138');
+  s += R(130, 131, 20, 27, '#31572f') + R(145, 145, 3, 3, '#e6b63c') + R(133, 136, 13, 2, '#54824a');
+  for (let x = 213; x < 293; x += 16) s += R(x, 126, 8, 8, '#b94f32') + R(x + 8, 126, 8, 8, '#fff0d6');
+  s += R(218, 134, 70, 24, '#9b693b') + R(223, 139, 60, 15, '#5b3823');
+  // Street tiles, curb, drain, café table, metal chairs and tea glass.
+  s += R(0, 158, 320, 42, '#b28d5a') + R(0, 158, 320, 4, '#d8b77d');
+  for (let x = 0; x < 320; x += 26) s += R(x, 177, 20, 2, '#96754a');
+  s += R(20, 184, 18, 3, '#795d3d') + R(27, 181, 3, 9, '#795d3d');
+  s += R(24, 151, 4, 25, '#4b3020') + R(18, 141, 16, 6, '#4b3020') + R(21, 146, 10, 8, '#ffe6a0');
+  s += R(263, 168, 35, 4, '#fff0d6') + R(276, 172, 4, 12, '#5d4632') + R(267, 173, 4, 9, '#5d4632') + R(290, 173, 4, 9, '#5d4632');
+  s += R(246, 166, 10, 14, '#347ca1') + R(302, 166, 10, 14, '#347ca1') + R(272, 162, 6, 6, '#e6b63c') + R(273, 163, 4, 3, '#fff0d6');
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" shape-rendering="crispEdges" class="scene-svg" aria-hidden="true">${s}</svg>`;
 }
