@@ -1,6 +1,10 @@
 name: Import El-Moallem game project
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/import-game.yml"
   workflow_dispatch:
 
 permissions:
@@ -26,7 +30,6 @@ jobs:
                   rel = m.filename[len("el-moallem/"):]
                   if not rel or rel.startswith("/") or ".." in rel.split("/"):
                       continue
-                  # Exclude accidental browser crash/report data from the project.
                   if rel.startswith(".config/google-chrome-for-testing/"):
                       continue
                   os.makedirs(os.path.dirname(rel) or ".", exist_ok=True)
