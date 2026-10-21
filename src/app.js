@@ -19,7 +19,8 @@ import { orderShortages } from './game/neighborhood/customers.js';
 import { createBrowserSaveManager, SCHEMA_VERSION } from './game/save/saveAdapter.js';
 import { manualSaveResultMessage } from './game/save/saveFeedback.js';
 import { LANDMARKS, PLAYER_START, movePlayer, nearestLandmark } from './game/neighborhood/exploration.js';
-import { characterSprite, productSprite, shopSceneSvg, alleySceneSvg } from './ui/sprites.js';
+import { productSprite, shopSceneSvg, alleySceneSvg } from './ui/sprites.js';
+import { characterSprite } from './ui/illustrated-sprites.js';
 
 const fmt = (n) => {
   const v = Number(n);
