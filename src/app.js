@@ -445,7 +445,7 @@ function mapViewHtml() {
       ${alleySceneSvg()}
       ${LANDMARKS.map((item) => {
         const locked = item.id === 'rival' && !HassanUnlocked;
-        return `<div class="explore-marker ${locked ? 'locked' : ''}" style="left:${item.x}%;top:${item.y}%">
+        return `<div class="explore-marker ${locked ? 'locked' : ''} ${nearbyLandmark?.id === item.id ? 'nearby' : ''}" style="left:${item.x}%;top:${item.y}%">
           <span aria-hidden="true">${locked ? '🔒' : item.icon}</span><small>${locked ? 'محل لاحقاً' : esc(item.labelAr)}</small>
         </div>`;
       }).join('')}
