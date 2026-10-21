@@ -14,7 +14,7 @@ describe('neighborhood exploration', () => {
   it('returns the nearest landmark only while inside interaction range', () => {
     const shop = LANDMARKS.find((item) => item.id === 'shop');
     expect(nearestLandmark({ x: shop.x, y: shop.y })?.id).toBe('shop');
-    expect(nearestLandmark({ x: 96, y: 90 })).toBeNull();
+    expect(nearestLandmark({ x: 4, y: 78 })).toBeNull();
   });
 
   it('does not return a locked or missing landmark unless it is supplied', () => {
