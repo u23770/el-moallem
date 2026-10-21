@@ -660,3 +660,48 @@ button { touch-action: manipulation; }
 @media (prefers-reduced-motion: reduce) {
   .explore-player { transition: none; }
 }
+
+/* Final polish: make state, focus, and nearby interactions unmistakable. */
+::selection { background: #f0cf6a; color: #2b2118; }
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid #24618b;
+  outline-offset: 3px;
+}
+.hud-chip button:focus-visible {
+  outline: 2px solid #fff8e8;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.explore-marker.nearby > span {
+  background: #527744;
+  border-color: #ffe08a;
+  box-shadow: 0 0 0 3px rgba(255, 224, 138, .35), 0 4px 12px rgba(31,20,10,.34);
+}
+.explore-marker.nearby small {
+  background: #36572e;
+  border-color: #ffe08a;
+  color: #fff8e8;
+}
+.explore-pad button:not(:disabled):hover,
+.location-btn:not(:disabled):hover {
+  border-color: #8d6a37;
+  background-color: #fff2d2;
+}
+.explore-pad button:disabled {
+  color: #665746;
+}
+button, .btn, .location-btn, .stepper {
+  -webkit-touch-callout: none;
+}
+@media (min-width: 700px) {
+  .explore-control-row { align-items: stretch; }
+  .explore-interaction { justify-content: center; }
+  .explore-scene { aspect-ratio: 16 / 8.5; }
+}
+@media (max-width: 350px) {
+  .hud-top { gap: 5px; flex-wrap: wrap; }
+  .game-title { font-size: 21px; }
+  .title-badge { max-width: 42%; overflow-wrap: anywhere; }
+  .hud-top .small-btn { min-height: 38px; padding-inline: 7px; }
+  .explore-pad { grid-template-columns: repeat(3, 42px); grid-template-rows: repeat(3, 42px); }
+}
