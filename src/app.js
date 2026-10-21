@@ -17,7 +17,8 @@ import {
 import { levelProgress, canCompleteLevel, completeLevel, overallStoryProgress } from './game/story/story.js';
 import { orderShortages } from './game/neighborhood/customers.js';
 import { createBrowserSaveManager, SCHEMA_VERSION } from './game/save/saveAdapter.js';
-import { characterSprite, productSprite, shopSceneSvg, alleySceneSvg } from './ui/sprites.js';
+import { productSprite, shopSceneSvg, alleySceneSvg } from './ui/sprites.js';
+import { characterSprite } from './ui/illustrated-sprites.js';
 
 const fmt = (n) => {
   const v = Number(n);
