@@ -18,6 +18,7 @@ import { levelProgress, canCompleteLevel, completeLevel, overallStoryProgress } 
 import { orderShortages } from './game/neighborhood/customers.js';
 import { createBrowserSaveManager, SCHEMA_VERSION } from './game/save/saveAdapter.js';
 import { manualSaveResultMessage } from './game/save/saveFeedback.js';
+import { LANDMARKS, PLAYER_START, movePlayer, nearestLandmark } from './game/neighborhood/exploration.js';
 import { characterSprite, productSprite, shopSceneSvg, alleySceneSvg } from './ui/sprites.js';
 
 const fmt = (n) => {
@@ -36,6 +37,7 @@ let view = 'shop';
 let dialogue = null; // {lines, idx, choices?, onDone?}
 let modal = null;    // 'settings' | 'reset' | 'help' | 'corrupt'
 let selectedLocation = null;
+let playerPosition = { ...PLAYER_START };
 let toasts = [];
 let toastTimer = null;
 let busy = false; // rapid-tap guard in the UI layer (logic layer also guards by actionId)
@@ -392,6 +394,8 @@ function questsViewHtml() {
 
 function mapViewHtml() {
   const HassanUnlocked = state.endlessUnlocked || state.storyLevel >= 4;
+  const visibleLandmarks = LANDMARKS.filter((item) => item.id !== 'rival' || HassanUnlocked);
+  const nearbyLandmark = nearestLandmark(playerPosition, visibleLandmarks);
   let detail = '';
   if (selectedLocation === 'cafe') {
     detail = `<section class="card" aria-label="قهوة الحارة">
@@ -432,12 +436,41 @@ function mapViewHtml() {
     </section>`;
   }
   return `
-  <div class="scene-wrap" role="img" aria-label="رسمة لحارة مصرية ضيقة ببيوت وبلكونات ولمبات معلقة وقهوة على الناصية">
-    ${alleySceneSvg()}
-  </div>
+  <section class="card explore-card" aria-label="استكشاف الحارة">
+    <div class="explore-heading">
+      <div><h2>🏘️ امشِ في الحارة</h2><p class="small muted">حرّك شخصيتك لحد ما تقرب من مكان، وبعدها دوس «ادخل».</p></div>
+      <span class="explore-hint">⌨️ الأسهم أو WASD</span>
+    </div>
+    <div class="explore-scene" role="img" aria-label="حارة مصرية شعبية؛ اللاعب يتحرك في الشارع بين البقالة وتاجر الجملة والقهوة">
+      ${alleySceneSvg()}
+      ${LANDMARKS.map((item) => {
+        const locked = item.id === 'rival' && !HassanUnlocked;
+        return `<div class="explore-marker ${locked ? 'locked' : ''}" style="left:${item.x}%;top:${item.y}%">
+          <span aria-hidden="true">${locked ? '🔒' : item.icon}</span><small>${locked ? 'محل لاحقاً' : esc(item.labelAr)}</small>
+        </div>`;
+      }).join('')}
+      <div class="explore-player" style="left:${playerPosition.x}%;top:${playerPosition.y}%" aria-hidden="true">
+        ${characterSprite('player', 'explore-avatar')}
+      </div>
+    </div>
+    <div class="explore-control-row">
+      <div class="explore-pad" role="group" aria-label="أزرار حركة الشخصية">
+        <span></span><button data-action="move-player" data-dx="0" data-dy="-3" aria-label="تحرك لأعلى">▲</button><span></span>
+        <button data-action="move-player" data-dx="-4" data-dy="0" aria-label="تحرك لليسار">◀</button>
+        <button class="explore-center" data-action="interact-nearby" aria-label="${nearbyLandmark ? `ادخل ${esc(nearbyLandmark.labelAr)}` : 'لا يوجد مكان قريب للتفاعل'}" ${nearbyLandmark ? '' : 'disabled'}>↵</button>
+        <button data-action="move-player" data-dx="4" data-dy="0" aria-label="تحرك لليمين">▶</button>
+        <span></span><button data-action="move-player" data-dx="0" data-dy="3" aria-label="تحرك لأسفل">▼</button><span></span>
+      </div>
+      <div class="explore-interaction" aria-live="polite">
+        <b>${nearbyLandmark ? `📍 ${esc(nearbyLandmark.labelAr)} قريب منك` : '🚶 اتحرك ناحية مكان في الحارة'}</b>
+        <p class="small muted">${nearbyLandmark ? 'تقدر تدخل المكان دلوقتي.' : 'استخدم أزرار الحركة أو الأسهم من الكيبورد.'}</p>
+        <button class="btn primary" data-action="interact-nearby" ${nearbyLandmark ? '' : 'disabled'}>${nearbyLandmark ? `ادخل ${esc(nearbyLandmark.labelAr)}` : 'قرّب من مكان الأول'}</button>
+      </div>
+    </div>
+  </section>
   <section class="card">
-    <h2>🏘️ الحارة — دوس على مكان تزوره</h2>
-    <p class="small muted">مفيش مشي ولا استعجال: اختار مكان وهتروحه على طول.</p>
+    <h2>📍 اختصارات الأماكن</h2>
+    <p class="small muted">تقدر تمشي وتدخل بنفسك، أو تستخدم اختصار سريع لأي مكان متاح.</p>
     <div class="location-grid">
       <button class="location-btn shop" data-action="loc-shop"><span aria-hidden="true">🧺</span><span class="loc-title">محلك (البقالة)</span><span class="small">بِع واستقبل الزباين عند الكاونتر.</span></button>
       <button class="location-btn wholesale" data-action="loc-wholesale"><span aria-hidden="true">🚚</span><span class="loc-title">تاجر الجملة</span><span class="small">عم رجب والعروض على «${esc(getProduct(state.deal.productId).nameAr)}» بـ${egp(effectiveCost(state, state.deal.productId))}.</span></button>
@@ -725,6 +758,33 @@ const ACTIONS = {
     { speaker: 'Hassan', text: 'أنا مبزعلش من المنافسة النضيفة.. بس مابستسلمش! زباين الحارة بيختاروا بأعينهم: بضاعة موجودة، سعر عادل، ووش مبسوط.' },
   ]),
   'cafe-help': () => guarded(() => commit(cafeHelp(state, newActionId('cafe')))),
+  'move-player': (el) => {
+    const next = movePlayer(playerPosition, Number(el.dataset.dx), Number(el.dataset.dy));
+    if (next.x === playerPosition.x && next.y === playerPosition.y) {
+      toast('وصلت لحافة الطريق — اتحرك في اتجاه تاني.', 'error');
+      return;
+    }
+    playerPosition = next;
+    render();
+  },
+  'interact-nearby': () => {
+    const accessible = LANDMARKS.filter((item) => item.id !== 'rival' || state.endlessUnlocked || state.storyLevel >= 4);
+    const nearby = nearestLandmark(playerPosition, accessible);
+    if (!nearby) {
+      toast('قرّب من مكان الأول عشان تقدر تدخل.', 'error');
+      return;
+    }
+    if (nearby.id === 'shop') {
+      view = 'shop';
+      selectedLocation = null;
+      render();
+      window.scrollTo(0, 0);
+      return;
+    }
+    selectedLocation = nearby.id;
+    render();
+    toast(nearby.id === 'wholesale' ? 'وصلت عند عم رجب 🚚' : nearby.id === 'cafe' ? 'أهلًا بيك في قهوة الحارة ☕' : 'وصلت لمحل حسن المنافس');
+  },
   'loc-shop': () => { view = 'shop'; selectedLocation = null; render(); window.scrollTo(0, 0); },
   'loc-wholesale': () => { selectedLocation = 'wholesale'; render(); toast('وصلت عند عم رجب 🚚'); },
   'loc-cafe': () => { selectedLocation = 'cafe'; render(); toast('أهلًا بيك في قهوة الحارة ☕'); },
@@ -778,7 +838,25 @@ export function startApp() {
     state = next; persist(); render();
     toast('اتحفظت الإعدادات ✔');
   });
-  app.addEventListener('keydown', (ev) => {
+  document.addEventListener('keydown', (ev) => {
+    if (view === 'map' && !dialogue && !modal) {
+      const directions = {
+        ArrowUp: [0, -3], w: [0, -3], W: [0, -3],
+        ArrowDown: [0, 3], s: [0, 3], S: [0, 3],
+        ArrowLeft: [-4, 0], a: [-4, 0], A: [-4, 0],
+        ArrowRight: [4, 0], d: [4, 0], D: [4, 0],
+      };
+      const delta = directions[ev.key];
+      const target = ev.target;
+      const typing = target instanceof HTMLElement
+        && (target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName));
+      if (delta && !typing) {
+        ev.preventDefault();
+        playerPosition = movePlayer(playerPosition, delta[0], delta[1]);
+        render();
+        return;
+      }
+    }
     if ((ev.key === 'Enter' || ev.key === ' ') && dialogue && ev.target === document.body) {
       // keyboard players can advance dialogue without hunting for the button
       ACTIONS['dialogue-next']();
