@@ -606,6 +606,8 @@ button { touch-action: manipulation; }
 }
 .explore-avatar { display: block; width: 100%; }
 .explore-avatar svg { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+/* Smooth vector character artwork; product icons and alley background retain pixel-art rendering. */
+.sprite svg, .explore-avatar svg { image-rendering: auto; shape-rendering: geometricPrecision; }
 .explore-control-row { display: flex; align-items: center; gap: 12px; }
 .explore-pad {
   flex: 0 0 auto;
