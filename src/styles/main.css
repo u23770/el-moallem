@@ -104,6 +104,8 @@ body {
 .scene-customer { position: absolute; bottom: 4%; right: 6%; width: 21%; }
 .scene-player { position: absolute; bottom: 3%; left: 19%; width: 15%; }
 .sprite svg, .product-icon svg { width: 100%; height: auto; display: block; image-rendering: pixelated; }
+/* Character art uses smooth vector curves; keep pixelation only for product icons. */
+.sprite svg { image-rendering: auto; }
 .sprite { display: inline-block; width: 56px; }
 .sprite.large { width: 84px; }
 .product-icon { display: inline-block; width: 34px; flex: 0 0 34px; }
