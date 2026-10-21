@@ -22,10 +22,10 @@ npm run dev        # http://localhost:5173  (Vite, host 0.0.0.0)
 ## الاختبارات (Tests)
 
 ```bash
-npm test           # Vitest — 40 tests, node environment
+npm test           # Vitest — 47 test cases in this branch
 ```
 
-آخر تشغيل فعلي (٢٠٢٦-١٠-٢٠): **3 test files, 40/40 passed** وتغطي:
+النسخة الأساسية على `main` لديها نتيجة موثقة **40/40** (٢٠٢٦-١٠-٢٠). أُضيفت في هذا الفرع ٧ اختبارات للحركة والتفاعل القريب ورسالة الحفظ اليدوي؛ شغّل `npm test` محلياً للتحقق من المجموعة الكاملة بعد تثبيت الحزم. تغطي الاختبارات:
 
 1. رصيد البداية (٥٠٠ جنيه) والحالة الأولية
 2. الشراء مع/من غير رصيد كافٍ، السعة، وقفل المنتجات الساقعة قبل الثلاجة
@@ -64,12 +64,14 @@ npm run sprites    # يعيد توليد assets/sprites/*.svg و backgrounds و 
 
 ## ازاي تلعب (Controls)
 
-- تحكم كامل باللمس/النقر، أهداف لمس ≥ ٤٨px، وتنقل سفلي من ٦ شاشات:
-  **المحل** (بِع/اخدم الزبون) • **البضاعة** (الجملة والأسعار) • **الحارة**
-  (المحل/عم رجب/القهوة/المنافس) • **المهام** • **التطوير** • **الحسابات**.
-- الحوارات توقّف اللعب؛ مفيش أي ضغط زمني.
-- دعم كيبورد: كل العناصر أزرار HTML حقيقية (`Tab` + `Enter`)، وتقديم الحوار
-  بزر التأكيد. دعم «تقليل الحركة» و«الصوت» من الإعدادات.
+- تحكم باللمس/النقر وتنقل سفلي من ٦ شاشات: **المحل** • **البضاعة** • **الحارة**
+  • **المهام** • **التطوير** • **الحسابات**.
+- شاشة الحارة فيها حركة خطوة بخطوة بلوحة اتجاهات للموبايل، أو الأسهم و`WASD`
+  على الكيبورد. تقدر تدخل المكان لما تقرب منه، والاختصارات المباشرة ما زالت موجودة.
+- الحركة الحالية داخل مشهد ثابت؛ الكاميرا لا تتبع اللاعب بعد، والعالم ليس 2.5D
+  متكاملاً حتى الآن.
+- الحوارات توقّف اللعب؛ مفيش أي ضغط زمني. كل عناصر التحكم أزرار HTML حقيقية
+  ويمكن الوصول لها عبر `Tab` و`Enter`. دعم «تقليل الحركة» و«الصوت» من الإعدادات.
 - فلوسك وقعت؟ «الحارة ← القهوة»: شغلانة طوارئ بـ٣٠ جنيه (لرصيد أقل من ١٢٠،
   بفاصل خدمة زبونين) — مفيش Soft-lock.
 
@@ -116,7 +118,9 @@ src/game/economy/economy.js           # buy/sell/pricing/upgrades/cafe safety-ne
 src/game/quests/                      # quest engine + endless generator (seeded)
 src/game/story/story.js               # 5-level progression, metrics
 src/game/neighborhood/customers.js    # order generation
+src/game/neighborhood/exploration.js  # bounded walking + nearby landmark detection
 src/game/save/saveAdapter.js          # storage interface, migrations, corruption safety
+src/game/save/saveFeedback.js         # truthful manual-save success feedback
 assets/sprites|backgrounds|icons      # generated .svg asset files
 assets/audio/README.txt               # WebAudio blips instead of audio files (by design)
 scripts/generate-sprites.mjs · pw-click.py (QA helper for Playwright clicks)
