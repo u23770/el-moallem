@@ -542,3 +542,121 @@ button { touch-action: manipulation; }
 @media (max-width: 380px) {
   .scene-status { border-radius: 10px; padding: 6px 8px; gap: 4px 7px; }
 }
+
+
+/* Walkable neighborhood MVP: touch controls, keyboard movement, and nearby entry prompts. */
+.explore-card { display: flex; flex-direction: column; gap: 12px; }
+.explore-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.explore-heading h2 { margin: 0 0 4px; }
+.explore-hint { flex: 0 0 auto; align-self: center; border: 1px solid #dfcfb3; border-radius: 999px; background: #f6ecd7; padding: 5px 9px; color: #6b5136; font-size: 11px; font-weight: 800; }
+.explore-scene {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 320 / 200;
+  border: 1px solid #bb9b6d;
+  border-radius: 13px;
+  background: #b08d5a;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.18), 0 6px 18px rgba(50,34,18,.12);
+}
+.explore-scene > .scene-svg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+.explore-marker {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  transform: translate(-50%, -82%);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.explore-marker > span {
+  display: grid;
+  place-items: center;
+  width: clamp(25px, 7vw, 35px);
+  height: clamp(25px, 7vw, 35px);
+  border: 2px solid #fff7e6;
+  border-radius: 50%;
+  background: #49301e;
+  box-shadow: 0 2px 8px rgba(31,20,10,.32);
+  font-size: clamp(13px, 3.8vw, 19px);
+}
+.explore-marker small {
+  max-width: 100px;
+  padding: 2px 6px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 5px;
+  background: rgba(43,29,18,.92);
+  color: #fff8e8;
+  font-size: clamp(9px, 2.6vw, 11px);
+  font-weight: 800;
+  line-height: 1.25;
+}
+.explore-marker.locked { opacity: .68; filter: grayscale(.35); }
+.explore-player {
+  position: absolute;
+  z-index: 5;
+  width: clamp(20px, 6.5%, 36px);
+  transform: translate(-50%, -76%);
+  filter: drop-shadow(0 3px 2px rgba(28,18,9,.45));
+  pointer-events: none;
+  transition: left .11s ease-out, top .11s ease-out;
+}
+.explore-avatar { display: block; width: 100%; }
+.explore-avatar svg { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+.explore-control-row { display: flex; align-items: center; gap: 12px; }
+.explore-pad {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(38px, 44px));
+  grid-template-rows: repeat(3, 42px);
+  gap: 4px;
+  align-items: stretch;
+  justify-content: center;
+}
+.explore-pad button {
+  min-width: 38px;
+  min-height: 42px;
+  padding: 0;
+  border: 1px solid #c4ab82;
+  border-radius: 10px;
+  background: #fffaf0;
+  color: #3b291b;
+  box-shadow: 0 2px 0 rgba(56,41,29,.13);
+  font-size: 18px;
+  font-weight: 900;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+.explore-pad button:active { transform: translateY(1px); box-shadow: none; }
+.explore-pad button:focus-visible { outline: 3px solid #2f6e9d; outline-offset: 2px; }
+.explore-pad .explore-center { background: #527744; color: #fffaf0; font-size: 20px; }
+.explore-pad button:disabled { opacity: .45; cursor: not-allowed; box-shadow: none; }
+.explore-interaction {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  border: 1px solid #e4d4b8;
+  border-radius: 11px;
+  background: #fffdf7;
+  padding: 12px;
+}
+.explore-interaction > b { font-size: 14px; }
+.explore-interaction p { margin: 0; }
+.explore-interaction .btn { width: 100%; }
+.explore-interaction .btn:disabled { opacity: .56; cursor: not-allowed; }
+@media (max-width: 420px) {
+  .explore-heading { flex-direction: column; gap: 4px; }
+  .explore-hint { align-self: flex-start; }
+  .explore-control-row { flex-direction: column; align-items: stretch; }
+  .explore-pad { align-self: center; }
+  .explore-interaction { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .explore-player { transition: none; }
+}
