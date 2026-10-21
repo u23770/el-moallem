@@ -17,6 +17,7 @@ import {
 import { levelProgress, canCompleteLevel, completeLevel, overallStoryProgress } from './game/story/story.js';
 import { orderShortages } from './game/neighborhood/customers.js';
 import { createBrowserSaveManager, SCHEMA_VERSION } from './game/save/saveAdapter.js';
+import { manualSaveResultMessage } from './game/save/saveFeedback.js';
 import { characterSprite, productSprite, shopSceneSvg, alleySceneSvg } from './ui/sprites.js';
 
 const fmt = (n) => {
@@ -79,6 +80,7 @@ function renderToasts() {
 function persist() {
   const res = saveManager.save(state);
   if (!res.ok) toast('خد بالك: الحفظ التلقائي فشل (تخزين المتصفح ممتلئ أو مقفول).', 'error');
+  return res;
 }
 
 /** Apply a game-logic result: swap state, autosave, re-render, feedback. */
@@ -730,7 +732,10 @@ const ACTIONS = {
   'open-settings': () => { modal = 'settings'; render(); },
   'open-help': () => { modal = 'help'; render(); },
   'close-modal': () => { modal = null; render(); },
-  'manual-save': () => { persist(); toast('💾 اتحفظت! تقدمك بأمان في المتصفح ده.'); },
+  'manual-save': () => {
+    const message = manualSaveResultMessage(persist());
+    if (message) toast(message);
+  },
   'ask-reset': () => { modal = 'reset'; render(); },
   'confirm-reset': () => {
     saveManager.clear();
